@@ -20,12 +20,11 @@ public class FamilyMembership extends Membership {
 
     @Override
     public BigDecimal getMonthlyPrice() {
-        BigDecimal extraCost = new BigDecimal("12.50")
+        BigDecimal extramemberCost = new BigDecimal("12.50")
                 .multiply(BigDecimal.valueOf(extraMembers));
-
-        BigDecimal monthlyPrice = getBaseRate().add(extraCost);
         //makes it so every membership after the first is cheaper and is added that way
-
+        BigDecimal monthlyPrice = getBaseRate().add(extramemberCost);
+        //after 3 extra members get a 10% iscount on anything after
         if (extraMembers >= 3) {
             monthlyPrice = monthlyPrice.multiply(new BigDecimal("0.90"));
         }
@@ -35,8 +34,6 @@ public class FamilyMembership extends Membership {
 
     @Override
     public String toString() {
-        return "Family | " + getMemberName()
-                + " | " + getMonths() + " months"
-                + " | extra members: " + extraMembers;
+        return "Family | " + getMemberName() + " | " + getMonths() + " months" + " | extra members: " + extraMembers;
     }
 }
